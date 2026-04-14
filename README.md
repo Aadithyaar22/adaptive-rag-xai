@@ -4,6 +4,7 @@
 
 ### Ask questions about ML research. Get grounded answers. See exactly *why*.
 
+![Demo](screenshots/demo.gif)
 
 <br/>
 
