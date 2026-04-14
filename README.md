@@ -1,6 +1,6 @@
 <div align="center">
 
-# Adaptive RAG · XAI · MLOps
+# 🧠 Adaptive RAG · XAI · MLOps
 
 ### Ask questions about ML research. Get grounded answers. See exactly *why*.
 
