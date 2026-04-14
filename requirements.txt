@@ -1,0 +1,37 @@
+# RAG core
+langchain
+langchain-community
+chromadb
+sentence-transformers
+rank-bm25
+
+# PDF parsing + ArXiv
+arxiv
+pymupdf
+
+# LLM + fine-tuning
+mlx-lm
+transformers
+torch
+
+# XAI
+shap
+bertviz
+
+# Evaluation
+ragas
+evidently
+
+# MLOps
+wandb
+mlflow
+
+# API + demo
+fastapi
+uvicorn
+gradio
+
+# Utils
+python-dotenv
+tqdm
+huggingface-hub
