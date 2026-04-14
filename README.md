@@ -4,6 +4,8 @@
 
 ### Ask questions about ML research. Get grounded answers. See exactly *why*.
 
+![Demo](screenshots/demo.gif)
+
 <br/>
 
 > Built on 50 real ArXiv papers · Mistral-7B · Apple Silicon · No cloud GPU needed
