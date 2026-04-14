@@ -175,7 +175,7 @@ adaptive-rag-xai/
 ### 1. Clone and set up
 
 ```bash
-git clone https://github.com/your-username/adaptive-rag-xai.git
+git clone https://github.com/Aadithyaar22/adaptive-rag-xai.git
 cd adaptive-rag-xai
 
 python3 -m venv venv
