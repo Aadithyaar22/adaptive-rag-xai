@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🧠 Adaptive RAG · XAI · MLOps
+# Adaptive RAG · XAI · MLOps
 
 ### Ask questions about ML research. Get grounded answers. See exactly *why*.
 
@@ -27,7 +27,7 @@
 
 ---
 
-## 🤔 What problem does this solve?
+## What problem does this solve?
 
 Normal AI chatbots **hallucinate** — they sound confident but sometimes make things up entirely.
 
@@ -41,7 +41,7 @@ You ask a question about machine learning research. The system finds the most re
 
 ---
 
-## ✨ What makes this different
+## What makes this different
 
 Most RAG projects do `embed → retrieve → answer` and stop there. This project adds three layers:
 
@@ -54,7 +54,7 @@ The system classifies your query before searching:
 | Simple / definitional | BM25 keyword search | *"What is RAG?"* |
 | Complex / conceptual | Dense + BM25 hybrid (70/30) | *"How does KL divergence prevent policy drift in RLHF?"* |
 
-**🔬 2. XAI — Explainable chunk attribution**
+**2. XAI — Explainable chunk attribution**
 
 Most people apply SHAP to classifiers. This project applies **SHAP-style ablation scoring to retrieval** — showing which source chunk was responsible for what percentage of the final answer.
 
@@ -68,7 +68,7 @@ Query: "explain the role of KL divergence in RLHF training"
   #5  ░░░░░░░░░░░░   0.0%  Iterative Preference Learning  ← caught as irrelevant
 ```
 
-**📊 3. Automated RAGAS Evaluation**
+**3. Automated RAGAS Evaluation**
 
 Every run is graded automatically with real eval metrics — no manual checking.
 
@@ -159,7 +159,7 @@ adaptive-rag-xai/
 
 ---
 
-## ⚡ Quick Start
+## Quick Start
 
 ### Prerequisites
 
@@ -346,7 +346,7 @@ The knowledge base is already on disk — no rebuilding needed.
 
 ---
 
-## 🛠️ Troubleshooting
+## Troubleshooting
 
 | Error | Cause | Fix |
 |---|---|---|
@@ -372,7 +372,7 @@ The knowledge base is already on disk — no rebuilding needed.
 
 ---
 
-## 🧰 Full tech stack
+## Full tech stack
 
 ```
 LLM Inference       Ollama · Mistral-7B (full 16-bit on Apple Silicon)
@@ -391,7 +391,7 @@ Paper Fetching      arxiv Python client
 
 ---
 
-## 🚧 Limitations & future work
+## Limitations & future work
 
 - **Corpus scale** — 50 papers is a solid demo. Scaling to 500+ would stress-test retrieval precision at production scale.
 - **Fine-tuning** — MLX-LM LoRA fine-tuning on domain-specific QA pairs is the planned next phase.
