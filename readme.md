@@ -408,8 +408,8 @@ Built by **Aadithya** — CSE (AI & ML) undergrad passionate about production ML
 
 This project demonstrates real ML engineering thinking: retrieval strategy design, explainability applied to retrieval (not just classification), automated evaluation with measurable metrics, and end-to-end MLOps — all running locally on Apple Silicon.
 
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://linkedin.com/in/your-profile)
-[![GitHub](https://img.shields.io/badge/GitHub-Follow-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/your-username)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/aadithya-a-r/)
+[![GitHub](https://img.shields.io/badge/GitHub-Follow-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/Aadithyaar22)
 
 ---
 
