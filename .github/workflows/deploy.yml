@@ -1,0 +1,44 @@
+name: Deploy to HF Spaces
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "app.py"
+      - "generation/**"
+      - "retrieval/**"
+      - "xai/**"
+      - "requirements.txt"
+
+jobs:
+  deploy:
+    name: Sync to Hugging Face Spaces
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          lfs: true
+
+      - name: Push to HF Spaces
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+        run: |
+          git config --global user.email "ci@github-actions.com"
+          git config --global user.name "GitHub Actions"
+
+          git clone https://Aadithyaar22:$HF_TOKEN@huggingface.co/spaces/Aadithya1122/adaptive-rag-xai hf_space
+
+          # Copy relevant files to space
+          cp app.py hf_space/app.py
+          cp -r retrieval/ hf_space/retrieval/
+          cp -r generation/ hf_space/generation/
+          cp -r xai/ hf_space/xai/
+          cp requirements.txt hf_space/requirements.txt
+
+          cd hf_space
+          git add .
+          git diff --cached --quiet || git commit -m "deploy: sync from GitHub ${{ github.sha }}"
+          git push

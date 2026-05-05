@@ -1,0 +1,38 @@
+name: Security Audit
+
+on:
+  schedule:
+    - cron: "0 9 * * 1"   # every Monday 9am UTC
+  workflow_dispatch:        # manual trigger
+
+jobs:
+  audit:
+    name: Dependency Vulnerability Scan
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install pip-audit
+        run: pip install pip-audit
+
+      - name: Run audit
+        run: |
+          pip-audit -r requirements.txt \
+            --ignore-vuln GHSA-undefined \
+            --format markdown \
+            --output audit-report.md || true
+          cat audit-report.md
+
+      - name: Upload audit report
+        uses: actions/upload-artifact@v4
+        with:
+          name: security-audit
+          path: audit-report.md
+          retention-days: 30

@@ -1,0 +1,43 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  test:
+    name: Lint & Test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+
+      - name: Install dependencies
+        run: |
+          pip install --upgrade pip
+          pip install flake8 pytest
+          pip install langchain langchain-community chromadb \
+                      sentence-transformers rank-bm25 shap \
+                      python-dotenv tqdm groq
+
+      - name: Lint with flake8
+        run: |
+          flake8 . \
+            --exclude=venv,__pycache__,.git \
+            --max-line-length=120 \
+            --ignore=E501,W503,E203
+
+      - name: Check imports resolve
+        run: |
+          python -c "from retrieval.router import QueryRouter; print('retrieval OK')"
+          python -c "from generation.generator import generate; print('generation OK')"
+          python -c "from xai.chunk_explainer import explain; print('xai OK')"
