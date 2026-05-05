@@ -1,13 +1,13 @@
 import os
-from groq import Groq
 from dotenv import load_dotenv
 
 load_dotenv()
 
-client = Groq(api_key=os.getenv("GROQ_API_KEY"))
-
 
 def score_answer_with_chunk(query: str, chunk_text: str) -> float:
+    from groq import Groq
+    client = Groq(api_key=os.getenv("GROQ_API_KEY"))
+
     prompt = f"""Rate how useful this text chunk is for answering the question below.
 Respond with ONLY a number between 0.0 and 1.0. Nothing else.
 
