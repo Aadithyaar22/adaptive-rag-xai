@@ -284,7 +284,7 @@ python pipeline.py
 
 ---
 
-### 7. Launch the Gradio UI
+### 7. Launch the Streamlit UI
 
 ```bash
 python demo/app.py
@@ -292,7 +292,7 @@ python demo/app.py
 
 Open `http://127.0.0.1:7860` in your browser:
 
-![Gradio UI showing full interface with question input, answer panel, retrieved sources, and XAI contribution ranking](screenshots/06_gradio_ui.png)
+![Streamlit UI showing full interface with question input, answer panel, retrieved sources, and XAI contribution ranking](screenshots/06_streamlit_ui.png)
 
 > The UI shows four panels: the question input with chunk count slider, pipeline metadata (query type, strategy, XAI method), the generated answer with citations, retrieved sources with similarity scores, and the XAI chunk contribution ranking. Everything visible in one screen.
 
