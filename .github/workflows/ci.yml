@@ -11,6 +11,9 @@ jobs:
     name: Lint & Test
     runs-on: ubuntu-latest
 
+    env:
+      GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
