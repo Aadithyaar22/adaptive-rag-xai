@@ -220,6 +220,7 @@ OLLAMA_BASE_URL=http://localhost:11434
 OLLAMA_MODEL=mistral
 HF_TOKEN=your_huggingface_token      # huggingface.co/settings/tokens (free)
 WANDB_API_KEY=your_wandb_key         # wandb.ai/authorize (free, optional)
+GROQ_API_KEY=your_groq_key           # console.groq.com/keys
 ```
 
 ---
