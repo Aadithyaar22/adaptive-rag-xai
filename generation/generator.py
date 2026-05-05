@@ -1,10 +1,8 @@
-from groq import Groq
 import os
 from dotenv import load_dotenv
 
 load_dotenv()
 
-client = Groq(api_key=os.getenv("GROQ_API_KEY"))
 MODEL = "llama-3.1-8b-instant"
 
 SYSTEM_PROMPT = """You are a research assistant specializing in machine learning and AI.
@@ -31,6 +29,9 @@ Answer based strictly on the context above. Cite sources by their title."""
 
 
 def generate(query: str, chunks: list[dict], stream: bool = True) -> str:
+    from groq import Groq
+    client = Groq(api_key=os.getenv("GROQ_API_KEY"))
+
     prompt = build_prompt(query, chunks)
 
     response = client.chat.completions.create(
