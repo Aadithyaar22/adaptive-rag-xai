@@ -1,6 +1,6 @@
 
 
-x<div align="center">
+<div align="center">
 
 # 🧠 Adaptive RAG · XAI · MLOps
 
