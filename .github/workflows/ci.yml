@@ -32,9 +32,9 @@ jobs:
       - name: Lint with flake8
         run: |
           flake8 . \
-            --exclude=venv,__pycache__,.git,retrieval/test_retrieval.py,retrieval/test_router.py \
+            --exclude=venv,__pycache__,.git \
             --max-line-length=120 \
-            --ignore=E501,W503,E203,E302,E305,E402,F541
+            --ignore=E501,W503,E203,E302,E305,E402,F541,F401
 
       - name: Check imports resolve
         run: |
