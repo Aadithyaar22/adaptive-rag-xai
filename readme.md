@@ -149,7 +149,7 @@ adaptive-rag-xai/
 │   └── tracker.py           # W&B logging for retrieval, XAI, and eval metrics
 │
 ├── 📂 demo/
-│   └── app.py               # Gradio UI — answer + sources + XAI panel
+│   └── app.py               # Streamlit UI — answer + sources + XAI panel
 │
 ├── pipeline.py              # End-to-end: retrieve → generate → explain → log
 ├── evaluate.py              # Run RAGAS evaluation + push to W&B
