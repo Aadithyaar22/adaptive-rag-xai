@@ -1,18 +1,13 @@
-import shap
-import numpy as np
-import requests
-import json
 import os
+from groq import Groq
 from dotenv import load_dotenv
 
 load_dotenv()
 
-OLLAMA_BASE_URL = os.getenv("OLLAMA_BASE_URL", "http://localhost:11434")
-OLLAMA_MODEL = os.getenv("OLLAMA_MODEL", "mistral")
+client = Groq(api_key=os.getenv("GROQ_API_KEY"))
 
 
 def score_answer_with_chunk(query: str, chunk_text: str) -> float:
-    """Ask the model to score how relevant a chunk is to the query. Returns 0-1."""
     prompt = f"""Rate how useful this text chunk is for answering the question below.
 Respond with ONLY a number between 0.0 and 1.0. Nothing else.
 
@@ -21,21 +16,14 @@ Question: {query}
 Chunk: {chunk_text[:300]}
 
 Score:"""
-
-    payload = {
-        "model": OLLAMA_MODEL,
-        "messages": [{"role": "user", "content": prompt}],
-        "stream": False,
-        "options": {"temperature": 0.0, "num_ctx": 1024},
-    }
-
     try:
-        response = requests.post(
-            f"{OLLAMA_BASE_URL}/api/chat",
-            json=payload,
+        response = client.chat.completions.create(
+            model="llama-3.1-8b-instant",
+            messages=[{"role": "user", "content": prompt}],
+            temperature=0.0,
+            max_tokens=10,
         )
-        response.raise_for_status()
-        text = response.json()["message"]["content"].strip()
+        text = response.choices[0].message.content.strip()
         score = float("".join(c for c in text if c.isdigit() or c == "."))
         return min(max(score, 0.0), 1.0)
     except Exception:
@@ -43,19 +31,17 @@ Score:"""
 
 
 def ablation_importance(query: str, chunks: list[dict]) -> list[dict]:
-    """
-    Ablation-based XAI: score each chunk individually, then compute
-    importance as difference from full-context score.
-    This is a lightweight SHAP-style marginal contribution estimate.
-    """
-    n = len(chunks)
+    print(f"  Computing XAI scores for {len(chunks)} chunks...")
     individual_scores = []
 
-    print(f"  Computing XAI scores for {n} chunks...")
     for i, chunk in enumerate(chunks):
         score = score_answer_with_chunk(query, chunk["text"])
         individual_scores.append(score)
         print(f"    Chunk {i+1}: {score:.3f} | {chunk['title'][:50]}")
+
+    if sum(individual_scores) == 0:
+        print("  XAI scores all zero — falling back to retrieval scores")
+        individual_scores = [c.get("score", 0.0) for c in chunks]
 
     total = sum(individual_scores) if sum(individual_scores) > 0 else 1.0
     normalized = [s / total for s in individual_scores]
@@ -77,19 +63,8 @@ def ablation_importance(query: str, chunks: list[dict]) -> list[dict]:
 
 
 def explain(query: str, chunks: list[dict]) -> dict:
-    print(f"\n[XAI] Explaining {len(chunks)} chunks for query:")
-    print(f"      '{query}'\n")
-
+    print(f"\n[XAI] Explaining {len(chunks)} chunks...")
     explained = ablation_importance(query, chunks)
-
-    print(f"\n[XAI] Contribution ranking:")
-    print(f"  {'Rank':<5} {'Contrib':>8}  {'Raw':>6}  Title")
-    print(f"  {'-'*60}")
-    for c in explained:
-        print(
-            f"  #{c['xai_rank']:<4} {c['xai_contribution']:>7.1%}  "
-            f"{c['xai_raw_score']:>6.3f}  {c['title'][:45]}"
-        )
 
     return {
         "query": query,

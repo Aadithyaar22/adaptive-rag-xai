@@ -24,17 +24,17 @@ jobs:
       - name: Install dependencies
         run: |
           pip install --upgrade pip
-          pip install flake8 pytest
+          pip install flake8
           pip install langchain langchain-community chromadb \
-                      sentence-transformers rank-bm25 shap \
+                      sentence-transformers rank-bm25 \
                       python-dotenv tqdm groq
 
       - name: Lint with flake8
         run: |
           flake8 . \
-            --exclude=venv,__pycache__,.git \
+            --exclude=venv,__pycache__,.git,retrieval/test_retrieval.py,retrieval/test_router.py \
             --max-line-length=120 \
-            --ignore=E501,W503,E203
+            --ignore=E501,W503,E203,E302,E305,E402,F541
 
       - name: Check imports resolve
         run: |

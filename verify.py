@@ -1,4 +1,3 @@
-import sys
 
 print("=== Checking all dependencies ===\n")
 
